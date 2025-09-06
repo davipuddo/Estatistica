@@ -64,7 +64,7 @@ if (__name__ == "__main__"):
         DEVIATION += (i-MEAN)**2;
 
     for i in range(1, 4):
-        tmp = int((i*(N+1)) / 4.0);
+        tmp = int((N+1) * 0.25 * i);
         LQK.append(DATA[tmp]);
 
     MODE.sort(reverse=True);
