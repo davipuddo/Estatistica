@@ -47,15 +47,13 @@ if (__name__ == "__main__"):
     DATA = getData();
     N = len(DATA);
 
-    # Get mean, median, mode, standard deviation and quartiles
-
-    N = len(DATA);
+    # Get mean and median
     MEAN = sum(DATA) / N;
     MEDIAN = DATA[int(N/2)];
+
+    # Get deviation and mode
     MODE = [];
     DEVIATION = 0;
-    LQK = [];
-
     for i in DATA:
         c = DATA.count(i); 
         if (c > 1):
@@ -63,17 +61,19 @@ if (__name__ == "__main__"):
                 MODE.append((c, i));
         DEVIATION += (i-MEAN)**2;
 
+    MODE.sort(reverse=True);
+    DEVIATION = (DEVIATION/(N-1))**.5;
+        
+    # Get quartiles
+    LQK = [];
     for i in range(1, 4):
         tmp = int((N+1) * 0.25 * i);
         LQK.append(DATA[tmp]);
 
-    MODE.sort(reverse=True);
-    DEVIATION = (DEVIATION/(N-1))**.5;
-
     # Get interquartile range
     IQR = LQK[2] - LQK[0];
 
-    # Get outlier detection relevant points
+    # Get outlier detection points
     OD = [];
     toggle = -1;
     for i in (LQK[0], LQK[2]):
